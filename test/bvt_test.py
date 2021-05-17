@@ -10,17 +10,17 @@ poll = 2
 class IAppBVT(unittest.TestCase):
 
     def setUp(self):
-        desired_caps = {}
-        appium_server_url = config['appium_server_url']
-        desired_caps['platformName'] = config['desired_caps']['platformName']
-        desired_caps['udid'] = config['desired_caps']['udid']
-        desired_caps['deviceName'] = config['desired_caps']['deviceName']
-        desired_caps['appPackage'] = config['desired_caps']['appPackage']
-        desired_caps['appActivity'] = config['desired_caps']['appActivity']
-        desired_caps['automationName'] = config['desired_caps']['automationName']
-        desired_caps['noReset'] = config['desired_caps']['noReset']
+        desired_caps = {
+            "platformName": "Android",
+            "platformVersion": "6.0.1",
+            "deviceName": "emulator-5554",
+            "noReset": "false",
+            "automationName": "UiAutomator2",
+            "appPackage": "com.appsflyer.androidsampleapp",
+            "appActivity": ".MainActivity"
+        }
 
-        self.driver = webdriver.Remote(appium_server_url, desired_caps)
+        self.driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)
 
     def tearDown(self):
         self.driver.quit()
